@@ -1,6 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -35,6 +32,8 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
+            linkerOpts("-optlto=none")
+            freeCompilerArgs += listOf("-opt-in=kotlin.RequiresOptIn")
         }
     }
     
@@ -53,7 +52,6 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.moe.tlaster)
@@ -69,6 +67,8 @@ kotlin {
         iosMain.dependencies {
             implementation(libs.native.driver)
             implementation(libs.ktor.client.darwin)
+            implementation(libs.touchlab)
+            implementation(libs.skiko)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -105,6 +105,9 @@ android {
 
 dependencies {
     implementation(libs.koin.android)
+    implementation(libs.android.driver)
+    implementation(libs.androidx.material3.android)
+    implementation(libs.ktor.client.okhttp)
     debugImplementation(compose.uiTooling)
 }
 
