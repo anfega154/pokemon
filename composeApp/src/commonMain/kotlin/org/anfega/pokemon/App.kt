@@ -9,13 +9,14 @@ import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.rememberNavigator
 import org.anfega.pokemon.ui.navigation.Navigate
 import org.anfega.pokemon.ui.themes.AppTheme
+import org.koin.compose.KoinContext
 
 @Composable
 @Preview
 fun App() {
     PreComposeApp {
         val navigator = rememberNavigator()
-
+        KoinContext {
         AppTheme {
             Scaffold(
                 modifier = Modifier.fillMaxSize()
@@ -23,5 +24,6 @@ fun App() {
                 Navigate(navigator)
             }
         }
+            }
     }
 }
