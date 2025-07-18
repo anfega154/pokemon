@@ -7,16 +7,26 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    kotlin("plugin.serialization") version "1.9.22"
+    id("app.cash.sqldelight") version "2.0.1"
+}
+
+sqldelight {
+    databases {
+        create("Database") {
+            packageName.set("com.database")
+            version = 2
+        }
+    }
 }
 
 kotlin {
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+        compilations.all {
+            kotlinOptions.jvmTarget = "11"
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -43,6 +53,22 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(project.dependencies.platform(libs.koin.bom))
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.moe.tlaster)
+            api(libs.tlaster.precompose)
+            api(libs.tlaster.precompose.viewmodel)
+            implementation(libs.ktor.client.core)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.ktor.serialization)
+            implementation(libs.ktor.content.negotiation)
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+        }
+
+        iosMain.dependencies {
+            implementation(libs.native.driver)
+            implementation(libs.ktor.client.darwin)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -78,6 +104,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.koin.android)
     debugImplementation(compose.uiTooling)
 }
 
