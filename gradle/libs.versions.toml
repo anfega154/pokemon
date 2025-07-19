@@ -10,9 +10,14 @@ androidx-core = "1.16.0"
 androidx-espresso = "3.6.1"
 androidx-lifecycle = "2.9.1"
 androidx-testExt = "1.2.1"
-composeMultiplatform = "1.8.2"
+composeMultiplatform = "1.6.11"
 junit = "4.13.2"
-kotlin = "2.2.0"
+kotlin = "2.0.0"
+androidDriver = "2.0.1"
+koin = "3.5.1"
+ktor = "2.3.8"
+coroutines = "1.9.0"
+material3Android = "1.1.2"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -26,6 +31,25 @@ androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayo
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 androidx-lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "androidDriver" }
+koin-compose = { module = "io.insert-koin:koin-compose"}
+koin-bom = {module = "io.insert-koin:koin-bom", version.ref = "koin"}
+koin-core = {module = "io.insert-koin:koin-core"}
+koin-android = {module = "io.insert-koin:koin-android"}
+moe-tlaster = { module = "moe.tlaster:precompose-koin", version = "1.5.10" }
+tlaster-precompose = { module = "moe.tlaster:precompose", version = "1.5.10" }
+tlaster-precompose-viewmodel = { module = "moe.tlaster:precompose-viewmodel", version = "1.5.10" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+ktor-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor"}
+ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor"}
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
+android-driver = { group = "app.cash.sqldelight", name = "android-driver", version.ref = "androidDriver" }
+touchlab = { module = "co.touchlab:stately-common", version = "2.0.5" }
+skiko = {module = "org.jetbrains.skiko:skiko", version = "0.5.0"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
