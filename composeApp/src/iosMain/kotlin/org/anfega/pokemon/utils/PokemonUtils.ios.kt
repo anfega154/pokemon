@@ -1,16 +1,14 @@
 package org.anfega.pokemon.utils
 
 import kotlinx.cinterop.ExperimentalForeignApi
-import kotlinx.cinterop.UIntVar
-import kotlinx.cinterop.alloc
-import kotlinx.cinterop.memScoped
-import kotlinx.cinterop.ptr
-import kotlinx.cinterop.value
+
 //import platform.SystemConfiguration.SCNetworkReachabilityGetFlags
 //import platform.SystemConfiguration.kSCNetworkFlagsReachable
+//import platform.UIKit.UIImpactFeedbackGenerator
+//import platform.UIKit.UIImpactFeedbackStyleLight
 
 // Se deja la funcion que se debe usar para verificar la conectividad de red en iOS, aunque no se implementa aquí ya que no tengo un equipo MAC
-actual class PokemonNetwork {
+actual class PokemonUtils {
     @OptIn(ExperimentalForeignApi::class)
     actual fun isConnectedOrConnecting(): Boolean {
 //        val reachability = SCNetworkReachabilityCreateWithName(null, "www.google.com")
@@ -24,5 +22,12 @@ actual class PokemonNetwork {
 //                    (flags.value and kSCNetworkFlagsConnectionRequired == 0u)
 //        }
         return true // Placeholder for actual implementation
+    }
+
+    //    actual fun vibrate() {
+//        UIImpactFeedbackGenerator(UIImpactFeedbackStyleLight).impactOccurred()
+//    }
+    actual fun vibrate() {
+        // implemebntación comentada por que se esta trabajando en Windows lo que ha inpedido que se pueda probar
     }
 }

@@ -7,8 +7,8 @@ import androidx.compose.ui.Modifier
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.rememberNavigator
-import org.anfega.pokemon.ui.navigation.Navigate
-import org.anfega.pokemon.ui.themes.AppTheme
+import org.anfega.pokemon.presentation.ui.navigation.Navigate
+import org.anfega.pokemon.presentation.ui.themes.AppTheme
 import org.koin.compose.KoinContext
 
 @Composable

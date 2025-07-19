@@ -5,9 +5,16 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.os.VibrationEffect
+import android.os.Vibrator
 import androidx.annotation.RequiresPermission
+import org.anfega.pokemon.MainActivity
 
-actual class PokemonNetwork(private val context: Context) {
+actual class PokemonUtils(private val context: Context) {
+
+    private val vibrator =
+        MainActivity.ContextHolder.context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     actual fun isConnectedOrConnecting(): Boolean {
         val connectivityManager =
@@ -26,6 +33,17 @@ actual class PokemonNetwork(private val context: Context) {
         } else {
             val networkInfo = connectivityManager.activeNetworkInfo
             return networkInfo != null && networkInfo.isConnectedOrConnecting
+        }
+    }
+
+    @RequiresPermission(Manifest.permission.VIBRATE)
+    actual fun vibrate() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vibrator.vibrate(
+                VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE)
+            )
+        } else {
+            vibrator.vibrate(100)
         }
     }
 }

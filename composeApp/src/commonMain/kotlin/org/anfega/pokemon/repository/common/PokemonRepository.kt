@@ -5,14 +5,14 @@ import org.anfega.pokemon.domain.common.FetchRequest
 import org.anfega.pokemon.domain.common.NetworkResponse
 import org.anfega.pokemon.domain.common.ParamsRepository
 import org.anfega.pokemon.exception.PokemonException
-import org.anfega.pokemon.utils.PokemonNetwork
+import org.anfega.pokemon.utils.PokemonUtils
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 open class PokemonRepository<T : Any>(
     private val database: Database
 ) : KoinComponent {
-    private val pokemonNetwork: PokemonNetwork by inject()
+    private val pokemonNetwork: PokemonUtils by inject()
     private val request = Fetch()
     fun getDatabase() = database
 

@@ -1,0 +1,21 @@
+CREATE TABLE PokemonEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    imageUrl TEXT NOT NULL,
+    price REAL NOT NULL
+);
+
+
+selectAll:
+SELECT * FROM PokemonEntity;
+
+insertOrReplace:
+INSERT OR REPLACE INTO PokemonEntity (id, name, imageUrl, price)
+VALUES (?, ?, ?, ?);
+
+deleteById:
+DELETE FROM PokemonEntity
+WHERE id = ?;
+
+deleteAll:
+DELETE FROM PokemonEntity;

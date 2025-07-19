@@ -63,6 +63,8 @@ kotlin {
             implementation(libs.ktor.serialization)
             implementation(libs.ktor.content.negotiation)
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+            implementation("io.github.qdsfdhvh:image-loader:1.6.4")
+
         }
 
         iosMain.dependencies {

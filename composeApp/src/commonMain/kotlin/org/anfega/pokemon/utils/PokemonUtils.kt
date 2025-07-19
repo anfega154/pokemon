@@ -1,5 +1,6 @@
 package org.anfega.pokemon.utils
 
-expect class PokemonNetwork {
+expect class PokemonUtils {
     fun isConnectedOrConnecting(): Boolean
+    fun vibrate()
 }

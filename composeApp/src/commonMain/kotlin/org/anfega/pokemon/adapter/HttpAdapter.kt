@@ -10,6 +10,7 @@ import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
+import kotlinx.serialization.encodeToString
 import org.anfega.pokemon.domain.common.FetchRequest
 import org.anfega.pokemon.domain.common.NetworkResponse
 import org.anfega.pokemon.domain.common.Response
@@ -80,7 +81,7 @@ open class HttpAdapter (
                 NetworkResponse(
                     success = true,
                     message = "Items Obtenidos exitosamente",
-                    body = response.results.toString()
+                    body = getParser().encodeToString(response.results)
                 )
             } else {
                 NetworkResponse(

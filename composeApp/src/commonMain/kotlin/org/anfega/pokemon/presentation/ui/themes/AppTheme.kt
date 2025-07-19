@@ -1,4 +1,4 @@
-package org.anfega.pokemon.ui.themes
+package org.anfega.pokemon.presentation.ui.themes
 
 import androidx.compose.foundation.shape.AbsoluteCutCornerShape
 import androidx.compose.material3.MaterialTheme

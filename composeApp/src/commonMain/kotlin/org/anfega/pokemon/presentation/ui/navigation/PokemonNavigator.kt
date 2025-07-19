@@ -1,10 +1,11 @@
-package org.anfega.pokemon.ui.navigation
+package org.anfega.pokemon.presentation.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.Navigator
-import org.anfega.pokemon.ui.pages.HomeScreen
+import org.anfega.pokemon.presentation.ui.pages.CartScreen
+import org.anfega.pokemon.presentation.ui.pages.CatalogScreen
 import org.anfega.pokemon.utils.Routes
 
 
@@ -20,10 +21,11 @@ fun Navigate(navigator: Navigator) {
         navigator = navigator, initialRoute = initialRoute
     ) {
         scene(route = Routes.HOME) {
-            HomeScreen(navigator)
+            CatalogScreen(navigator)
         }
 
         scene(route = Routes.CAR) {
+            CartScreen(navigator)
         }
 
     }
