@@ -7,14 +7,19 @@ import org.anfega.pokemon.domain.model.Pokemon
 import org.anfega.pokemon.repository.CartRepositoryImpl
 import org.anfega.pokemon.repository.common.PokemonViewModel
 
-class CartViewModel : PokemonViewModel<Pokemon>(){
+class CartViewModel : PokemonViewModel<Pokemon>() {
 
     var cartItems by mutableStateOf<List<Pokemon>>(emptyList())
+        private set
 
     private val cartRepository = CartRepositoryImpl(getRepository())
 
-    suspend fun loadCart() {
-        cartItems = cartRepository.getCartItems()
+    init {
+        loadCart()
+    }
+
+    fun loadCart() {
+        cartItems = cartRepository.getCartItemsSync()
     }
 
     suspend fun removeItem(pokemonId: Int) {

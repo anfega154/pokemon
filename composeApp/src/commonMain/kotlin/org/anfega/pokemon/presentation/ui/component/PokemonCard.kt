@@ -16,28 +16,34 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.seiko.imageloader.rememberAsyncImagePainter
 
 
 @Composable
-fun PokemonCard(name: String, imageUrl: String, price: Double, onAction: () -> Unit) {
+fun PokemonCard(
+    name: String,
+    imageUrl: String,
+    price: Double,
+    icon: ImageVector = Icons.Default.Add,
+    onAction: () -> Unit
+) {
     val painter = rememberAsyncImagePainter(imageUrl)
     Card(modifier = Modifier.padding(8.dp).fillMaxWidth()) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-
             Image(
                 painter = painter,
                 contentDescription = "Pokemon Image",
                 modifier = Modifier.size(80.dp).padding(8.dp)
             )
             Column(modifier = Modifier.weight(1f)) {
-                Text(name.capitalize(), fontWeight = FontWeight.Bold)
+                Text(name.replaceFirstChar { it.uppercase() }, fontWeight = FontWeight.Bold)
                 Text("$${price}", style = MaterialTheme.typography.bodySmall)
             }
             IconButton(onClick = onAction) {
-                Icon(Icons.Default.Add, contentDescription = "Agregar")
+                Icon(icon, contentDescription = "Acción")
             }
         }
     }

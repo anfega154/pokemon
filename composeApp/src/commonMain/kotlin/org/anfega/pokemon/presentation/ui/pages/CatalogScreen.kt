@@ -24,9 +24,14 @@ import org.anfega.pokemon.utils.Routes
 
 @Composable
 fun CatalogScreen(navigator: Navigator) {
-    val viewModel = CatalogViewModel()
+    val viewModel = remember { CatalogViewModel() }
     val list by remember { derivedStateOf { viewModel.pokemonList } }
+    val cartCount by remember { derivedStateOf { viewModel.cartCount } }
     val scope = rememberCoroutineScope()
+
+    LaunchedEffect(Unit) {
+        scope.launch { viewModel.loadInitial() }
+    }
 
     LazyColumn {
         items(list) { pokemon ->
@@ -42,17 +47,20 @@ fun CatalogScreen(navigator: Navigator) {
         }
         item {
             LaunchedEffect(Unit) {
-                viewModel.loadMore()
+                scope.launch { viewModel.loadMore() }
             }
         }
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
         FloatingActionButton(
-            onClick = { navigator.navigate(Routes.CAR) },
+            onClick = {
+                if (cartCount > 0) navigator.navigate(Routes.CAR)
+            },
             modifier = Modifier.align(Alignment.BottomEnd)
         ) {
-            Icon(Icons.Default.ShoppingCart, contentDescription = "Carrito")
+            Icon(Icons.Default.ShoppingCart, contentDescription = "Ir al carrito")
         }
     }
 }
+
