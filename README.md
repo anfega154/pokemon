@@ -14,8 +14,10 @@ Aplicación multiplataforma desarrollada con Kotlin Multiplatform (KMP) que perm
 
 ### Pasos para ejecutar
 1. Clona el repositorio:
+     ```bash
    git clone https://github.com/anfega154/pokemon.git
    cd pokemon
+    ```
 2. Abre el proyecto con Android Studio.
 3. Sincroniza Gradle (File > Sync Project with Gradle Files).
 4. Ejecuta el proyecto en un emulador o dispositivo.
