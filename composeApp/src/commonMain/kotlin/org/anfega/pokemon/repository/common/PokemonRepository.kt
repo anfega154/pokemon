@@ -5,6 +5,7 @@ import org.anfega.pokemon.domain.common.FetchRequest
 import org.anfega.pokemon.domain.common.NetworkResponse
 import org.anfega.pokemon.domain.common.ParamsRepository
 import org.anfega.pokemon.exception.PokemonException
+import org.anfega.pokemon.utils.Constants
 import org.anfega.pokemon.utils.PokemonUtils
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -34,11 +35,11 @@ open class PokemonRepository<T : Any>(
         }
     }
 
-    suspend fun get(paramsRepository: ParamsRepository<T>): String? {
+    suspend fun get(paramsRepository: ParamsRepository<T>): NetworkResponse {
         return executeSafely {
             val requestData = createFetchRequest(paramsRepository)
             val networkResponse = request.get(requestData)
-            networkResponse.body
+            networkResponse
         }
     }
 
@@ -55,7 +56,7 @@ open class PokemonRepository<T : Any>(
             action()
         } else {
             throw PokemonException(
-                "No internet connection. Please check your network settings."
+                Constants.NO_CONNECTION_MESSAGE
             )
         }
     }

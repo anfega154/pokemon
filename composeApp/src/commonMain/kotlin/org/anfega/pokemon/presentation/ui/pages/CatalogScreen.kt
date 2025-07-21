@@ -26,16 +26,29 @@ import org.anfega.pokemon.presentation.ui.component.PokemonCard
 import org.anfega.pokemon.presentation.viewmodel.CatalogViewModel
 import org.anfega.pokemon.utils.Routes
 
+
 @Composable
 fun CatalogScreen(navigator: Navigator) {
     val viewModel = remember { CatalogViewModel() }
+
     val list by remember { derivedStateOf { viewModel.pokemonList } }
     val cartCount by remember { derivedStateOf { viewModel.cartCount } }
+    val snackbarMessage by remember { derivedStateOf { viewModel.snackbarMessage } }
+
     val scope = rememberCoroutineScope()
-    val snackbarHostState = remember { SnackbarHostState() }
+    val snackBarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(Unit) {
         scope.launch { viewModel.loadInitial() }
+    }
+
+    LaunchedEffect(snackbarMessage) {
+        snackbarMessage?.let {
+            scope.launch {
+                snackBarHostState.showSnackbar(it)
+                viewModel.clearSnackBarMessage()
+            }
+        }
     }
 
     val onCartClick: () -> Unit = {
@@ -43,7 +56,7 @@ fun CatalogScreen(navigator: Navigator) {
             navigator.navigate(Routes.CAR)
         } else {
             scope.launch {
-                snackbarHostState.showSnackbar("No tienes ítems seleccionados")
+                snackBarHostState.showSnackbar("No tienes ítems seleccionados")
             }
         }
     }
@@ -52,14 +65,13 @@ fun CatalogScreen(navigator: Navigator) {
         navigator = navigator,
         showTopBar = true,
         showBackButton = false,
-        snackbarHostState = snackbarHostState,
+        snackbarHostState = snackBarHostState,
         cartCount = cartCount,
         onCartClick = onCartClick
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
+                modifier = Modifier.fillMaxSize()
             ) {
                 items(list) { pokemon ->
                     PokemonCard(
@@ -103,6 +115,7 @@ fun CatalogScreen(navigator: Navigator) {
         }
     }
 }
+
 
 
 

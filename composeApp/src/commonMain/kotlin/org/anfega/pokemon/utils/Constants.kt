@@ -7,3 +7,7 @@ sealed class Routes {
     }
 
 }
+
+object Constants {
+    const val NO_CONNECTION_MESSAGE = "No internet connection. Please check your network settings."
+}

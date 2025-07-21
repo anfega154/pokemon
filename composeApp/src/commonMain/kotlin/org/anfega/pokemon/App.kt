@@ -17,13 +17,13 @@ fun App() {
     PreComposeApp {
         val navigator = rememberNavigator()
         KoinContext {
-        AppTheme {
-            Scaffold(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                Navigate(navigator)
+            AppTheme {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    Navigate(navigator)
+                }
             }
         }
-            }
     }
 }

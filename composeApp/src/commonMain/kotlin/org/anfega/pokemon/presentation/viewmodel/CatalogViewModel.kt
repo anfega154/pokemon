@@ -19,6 +19,13 @@ class CatalogViewModel : PokemonViewModel<Pokemon>() {
     var cartCount by mutableStateOf(0)
         private set
 
+    var snackbarMessage by mutableStateOf<String?>(null)
+        private set
+
+    fun clearSnackBarMessage() {
+        snackbarMessage = null
+    }
+
     init {
         updateCartCount()
     }
@@ -30,11 +37,16 @@ class CatalogViewModel : PokemonViewModel<Pokemon>() {
     }
 
     suspend fun loadMore() {
+        if (pokemonList.isNotEmpty() && !getUtils().isConnectedOrConnecting()) return
         if (isLoading) return
         isLoading = true
         val newPage = catalogRepository.getPokemonPage(currentOffset, 20)
-        pokemonList = pokemonList + newPage
-        currentOffset += 20
+        if (newPage.isEmpty()) {
+            snackbarMessage = "No se encontraron ítems para mostrar"
+        } else {
+            pokemonList = pokemonList + newPage
+            currentOffset += 20
+        }
         isLoading = false
     }
 
