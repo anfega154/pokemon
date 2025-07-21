@@ -1,11 +1,10 @@
 CREATE TABLE Pokemon(
-  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  name TEXT NOT NULL,
-  type TEXT
+  name TEXT NOT NULL PRIMARY KEY,
+  url TEXT
 );
 
 selectAll:
 SELECT * FROM Pokemon;
 
 insertPokemon:
-INSERT INTO Pokemon(name, type) VALUES (?, ?);
+INSERT OR REPLACE INTO Pokemon(name, url) VALUES (?, ?);
